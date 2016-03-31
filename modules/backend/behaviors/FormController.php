@@ -2,8 +2,8 @@
 
 use Str;
 use Lang;
-use October\Rain\Support\Facades\Flash;
-use Illuminate\Support\Facades\Event;
+use Flash;
+use Event;
 use Input;
 use Redirect;
 use Backend;

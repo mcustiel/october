@@ -15,9 +15,9 @@ class Youtube extends AbstractVideoComponent
         $this->addJs('https://www.youtube.com/iframe_api');
     }
 
-    public function onRender()
+    public function onRun()
     {
-        parent::onRender();
+        parent::onRun();
         $this->video = $this->getVideoId($this->property('video'));
     }
 
@@ -30,7 +30,7 @@ class Youtube extends AbstractVideoComponent
             $matches
         );
         if (!$found) {
-            throw \Exception('Video is not a youtube url');
+            throw \Exception('Youtube video component: Configured video is not a youtube url');
         }
         return empty($matches[1]) ? $matches[2] : $matches[1];
     }

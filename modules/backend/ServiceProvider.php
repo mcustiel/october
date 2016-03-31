@@ -2,9 +2,9 @@
 
 use App;
 use Lang;
-use Illuminate\Support\Facades\Event;
+use Event;
 use Backend;
-use Backend\Facades\BackendMenu;
+use BackendMenu;
 use BackendAuth;
 use Backend\Classes\WidgetManager;
 use System\Models\MailTemplate;

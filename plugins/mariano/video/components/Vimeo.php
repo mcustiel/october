@@ -11,9 +11,9 @@ class Vimeo extends AbstractVideoComponent
         ];
     }
 
-    public function onRender()
+    public function onRun()
     {
-        parent::onRender();
+        parent::onRun();
         $this->video = preg_replace(
             '~https?://vimeo.com/(\d+)~',
             'https://player.vimeo.com/video/\\1',

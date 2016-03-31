@@ -3,7 +3,7 @@
 use App;
 use Lang;
 use Input;
-use Illuminate\Support\Facades\Event;
+use Event;
 use Form as FormHelper;
 use Backend\Classes\FormTabs;
 use Backend\Classes\FormField;

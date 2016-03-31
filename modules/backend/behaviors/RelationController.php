@@ -2,7 +2,7 @@
 
 use Db;
 use Lang;
-use Illuminate\Support\Facades\Event;
+use Event;
 use Request;
 use Form as FormHelper;
 use Backend\Classes\ControllerBehavior;

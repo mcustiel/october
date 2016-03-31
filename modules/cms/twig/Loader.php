@@ -1,6 +1,6 @@
 <?php namespace Cms\Twig;
 
-use Illuminate\Support\Facades\Event;
+use Event;
 use Twig_LoaderInterface;
 use Cms\Classes\CmsObject;
 

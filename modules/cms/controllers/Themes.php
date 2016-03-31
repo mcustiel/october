@@ -2,11 +2,11 @@
 
 use File;
 use Yaml;
-use October\Rain\Support\Facades\Flash;
+use Flash;
 use Config;
 use Backend;
 use Redirect;
-use Backend\Facades\BackendMenu;
+use BackendMenu;
 use ValidationException;
 use ApplicationException;
 use Cms\Models\ThemeData;

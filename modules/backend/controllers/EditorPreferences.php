@@ -1,6 +1,6 @@
 <?php namespace Backend\Controllers;
 
-use Backend\Facades\BackendMenu;
+use BackendMenu;
 use Backend\Classes\Controller;
 use System\Classes\SettingsManager;
 use Backend\Models\EditorPreferences as EditorPreferencesModel;

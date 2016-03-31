@@ -7,7 +7,7 @@ use File;
 use Lang;
 use Http;
 use Cache;
-use Illuminate\Support\Facades\Schema;
+use Schema;
 use Config;
 use ApplicationException;
 use Cms\Classes\ThemeManager;

@@ -1,9 +1,9 @@
 <?php namespace Cms\Twig;
 
 use URL;
-use October\Rain\Support\Facades\Flash;
+use Flash;
 use Block;
-use Illuminate\Support\Facades\Event;
+use Event;
 use Twig_Extension;
 use Twig_TokenParser;
 use Twig_SimpleFilter;

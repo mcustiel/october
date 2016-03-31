@@ -37,7 +37,7 @@ abstract class AbstractVideoComponent extends ComponentBase
         ];
     }
 
-    public function onRender()
+    public function onRun()
     {
         $this->width = $this->property('width', 640);
         $this->height = $this->property('height', 390);

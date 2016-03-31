@@ -2,7 +2,7 @@
 
 use Str;
 use Lang;
-use Illuminate\Support\Facades\Event;
+use Event;
 use ApplicationException;
 use Backend\Classes\ControllerBehavior;
 use League\Csv\Writer;

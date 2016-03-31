@@ -55,7 +55,7 @@ class Library extends AbstractVideoComponent
         $this->addJs('assets/js/libs/ggsVideoPlayer.js');
     }
 
-    public function onRender()
+    public function onRun()
     {
         $this->width = $this->property('width', 640);
         $this->height = $this->property('height', 390);

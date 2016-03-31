@@ -1,6 +1,6 @@
 <?php namespace Backend\FormWidgets;
 
-use Illuminate\Support\Facades\Event;
+use Event;
 use Request;
 use Backend\Classes\FormWidgetBase;
 

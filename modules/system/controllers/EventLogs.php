@@ -3,10 +3,10 @@
 use Str;
 use Lang;
 use File;
-use October\Rain\Support\Facades\Flash;
+use Flash;
 use Backend;
 use Redirect;
-use Backend\Facades\BackendMenu;
+use BackendMenu;
 use Backend\Classes\Controller;
 use ApplicationException;
 use System\Classes\SettingsManager;

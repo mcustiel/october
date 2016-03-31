@@ -2,13 +2,13 @@
 
 use URL;
 use Lang;
-use October\Rain\Support\Facades\Flash;
-use Illuminate\Support\Facades\Event;
+use Flash;
+use Event;
 use Config;
 use Request;
 use Response;
 use Exception;
-use Backend\Facades\BackendMenu;
+use BackendMenu;
 use Backend\Classes\Controller;
 use Backend\Classes\WidgetManager;
 use Cms\Widgets\AssetList;

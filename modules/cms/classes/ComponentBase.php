@@ -2,7 +2,7 @@
 
 use Str;
 use Lang;
-use Illuminate\Support\Facades\Event;
+use Event;
 use Config;
 use Cms\Classes\CodeBase;
 use Cms\Classes\CmsException;

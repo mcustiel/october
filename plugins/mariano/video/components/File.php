@@ -24,9 +24,9 @@ class File extends AbstractVideoComponent
         return Video::select('id', 'name')->orderBy('name')->get()->lists('name', 'id');
     }
 
-    public function onRender()
+    public function onRun()
     {
-        parent::onRender();
+        parent::onRun();
         $video = (new Video())->where('id', '=', $this->property('video'))->first();
         $this->video = $video->video->path;
     }

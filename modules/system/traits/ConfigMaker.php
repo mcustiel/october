@@ -3,7 +3,7 @@
 use Yaml;
 use File;
 use Lang;
-use Illuminate\Support\Facades\Event;
+use Event;
 use SystemException;
 use Backend\Classes\Controller;
 use stdClass;

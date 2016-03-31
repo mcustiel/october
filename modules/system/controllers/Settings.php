@@ -1,10 +1,10 @@
 <?php namespace System\Controllers;
 
 use Lang;
-use October\Rain\Support\Facades\Flash;
+use Flash;
 use Backend;
 use Redirect;
-use Backend\Facades\BackendMenu;
+use BackendMenu;
 use System\Classes\SettingsManager;
 use Backend\Classes\Controller;
 use ApplicationException;

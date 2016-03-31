@@ -1,7 +1,7 @@
 <?php namespace Backend\Widgets;
 
 use Db;
-use Illuminate\Support\Facades\Event;
+use Event;
 use Backend\Classes\WidgetBase;
 use Backend\Classes\FilterScope;
 use ApplicationException;
