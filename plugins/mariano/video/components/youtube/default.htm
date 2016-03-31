@@ -1,0 +1,52 @@
+<!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+<div id="{{ __SELF__ }}-youtube-player"></div>
+
+{% set playerVar = __SELF__.alias|replace({'-': '_', '.': '_'}) %}
+
+{% put scripts %}
+<script>
+  var ${{ playerVar }};
+
+  function {{ playerVar }}_onPlayerReady(event) {
+      event.target.playVideo();
+  }
+
+  var {{ playerVar }}_onVideoEnded = function () { console.log('video ended'); },
+	  {{ playerVar }}_onVideoPlaying = function () { console.log('video playing'); },
+	  {{ playerVar }}_onVideoPaused = function () { console.log('video paused'); },
+	  {{ playerVar }}_onVideoBuffering = function () { console.log('video buffering'); },
+	  {{ playerVar }}_onVideoCued = function () { console.log('video cued'); };
+	  
+  function {{ playerVar }}_onPlayerStateChange(event) {
+    switch (event.data) {
+        case YT.PlayerState.ENDED:
+        	{{ playerVar }}_onVideoEnded();
+            break;
+        case YT.PlayerState.PLAYING:
+        	{{ playerVar }}_onVideoPlaying();
+            break;
+        case YT.PlayerState.PAUSED:
+        	{{ playerVar }}_onVideoPaused();
+            break;
+        case YT.PlayerState.BUFFERING:
+        	{{ playerVar }}_onVideoBuffering();
+            break;
+        case YT.PlayerState.CUED:
+        	{{ playerVar }}_onVideoCued();
+            break;
+    }
+  }
+
+  function onYouTubeIframeAPIReady() {
+      ${{ playerVar }} = new YT.Player('{{ __SELF__ }}-youtube-player', {
+      height: {{ __SELF__.height }},
+      width: {{ __SELF__.width }},
+      videoId: '{{ __SELF__.video }}',
+      events: {
+        'onReady': {{ playerVar }}_onPlayerReady,
+        'onStateChange': {{ playerVar }}_onPlayerStateChange
+      }
+    });
+  }
+</script>
+{% endput %}

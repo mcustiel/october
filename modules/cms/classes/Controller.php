@@ -7,7 +7,7 @@ use File;
 use View;
 use Lang;
 use Route;
-use Event;
+use Illuminate\Support\Facades\Event;
 use Config;
 use Session;
 use Request;

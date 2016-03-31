@@ -2,7 +2,7 @@
 
 use File;
 use Lang;
-use Event;
+use Illuminate\Support\Facades\Event;
 use Block;
 use SystemException;
 

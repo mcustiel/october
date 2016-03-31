@@ -1,0 +1,31 @@
+# ===================================
+#  Form Behavior Config
+# ===================================
+
+# Record name
+name: Video
+
+# Model Form Field configuration
+form: $/mariano/video/models/video/fields.yaml
+
+# Model Class name
+modelClass: Mariano\Video\Models\Video
+
+# Default redirect location
+defaultRedirect: mariano/video/video
+
+# Create page
+create:
+    title: Create Video
+    redirect: mariano/video/video/update/:id
+    redirectClose: mariano/video/video
+
+# Update page
+update:
+    title: Edit Video
+    redirect: mariano/video/video
+    redirectClose: mariano/video/video
+
+# Preview page
+preview:
+    title: Preview Video

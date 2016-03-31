@@ -5,7 +5,7 @@ use HTML as Html;
 use App;
 use Lang;
 use Input;
-use Event;
+use Illuminate\Support\Facades\Event;
 use Backend;
 use DbDongle;
 use Carbon\Carbon;

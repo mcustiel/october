@@ -5,7 +5,7 @@ use File;
 use Yaml;
 use Lang;
 use Cache;
-use Event;
+use Illuminate\Support\Facades\Event;
 use Config;
 use DbDongle;
 use SystemException;

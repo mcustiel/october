@@ -1,0 +1,28 @@
+<div class="{{ __SELF__ }}-video-wrapper">
+    <div id="{{ __SELF__ }}-video" class="{{ __SELF__.alias }}-video"></div>
+</div>
+{% set playerVar = __SELF__.alias|replace({'-': '_', '.': '_'}) %}
+
+{% put scripts %}
+<script>
+    ${{ playerVar }}VideoObject = new ggsVideoPlayer({
+        htmlContainer: document.getElementById('{{ __SELF__ }}-video'),
+        video: {
+            url: '{{ __SELF__.video }}',
+            poster: '{{ __SELF__.poster }}'
+        },
+        controls: true,
+        autoplay: false,
+        pauseOnVideo: true,
+        onPlay: function () {
+            console.log('video on play');
+        },
+        onPause: function () {
+            console.log('video on pause');
+        },
+        onMute: function (muted) {
+            console.log('video on mute');
+        }
+    });
+</script>
+{% endput %}

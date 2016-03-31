@@ -1,0 +1,15 @@
+@CHARSET "UTF-8";
+
+#main-column {
+	float: left;
+	width: 80%
+}
+
+#right-column {
+    float: left;
+    width: 20%
+}
+
+.clear {
+	clear: both;
+}

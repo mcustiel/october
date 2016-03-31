@@ -1,6 +1,6 @@
 <?php namespace Backend\Classes;
 
-use Event;
+use Illuminate\Support\Facades\Event;
 use BackendAuth;
 use System\Classes\PluginManager;
 

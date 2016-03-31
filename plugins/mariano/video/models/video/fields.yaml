@@ -1,0 +1,16 @@
+# ===================================
+#  Form Field Definitions
+# ===================================
+
+fields:
+    name:
+        span: full
+        label: Name
+    video:
+        label: Video file
+        type: fileupload
+        mode: file
+        fileTypes:
+          - mp4
+          - mov
+        prompt: Upload a video

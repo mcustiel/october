@@ -2,7 +2,7 @@
 
 use Redirect;
 use BackendAuth;
-use BackendMenu;
+use Backend\Facades\BackendMenu;
 use Backend\Classes\Controller;
 use Backend\Widgets\ReportContainer;
 

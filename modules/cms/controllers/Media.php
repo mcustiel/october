@@ -1,6 +1,6 @@
 <?php namespace Cms\Controllers;
 
-use BackendMenu;
+use Backend\Facades\BackendMenu;
 use Backend\Classes\Controller;
 use Cms\Widgets\MediaManager;
 

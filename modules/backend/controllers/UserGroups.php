@@ -1,6 +1,6 @@
 <?php namespace Backend\Controllers;
 
-use BackendMenu;
+use Backend\Facades\BackendMenu;
 use BackendAuth;
 use Backend\Classes\Controller;
 

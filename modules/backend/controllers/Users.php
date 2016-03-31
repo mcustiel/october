@@ -2,7 +2,7 @@
 
 use Backend;
 use Redirect;
-use BackendMenu;
+use Backend\Facades\BackendMenu;
 use BackendAuth;
 use Backend\Models\UserGroup;
 use Backend\Classes\Controller;

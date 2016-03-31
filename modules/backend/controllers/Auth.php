@@ -1,12 +1,12 @@
 <?php namespace Backend\Controllers;
 
 use Mail;
-use Flash;
+use October\Rain\Support\Facades\Flash;
 use Backend;
 use Redirect;
 use Validator;
 use BackendAuth;
-use BackendMenu;
+use Backend\Facades\BackendMenu;
 use Backend\Models\User;
 use Backend\Models\AccessLog;
 use Backend\Classes\Controller;

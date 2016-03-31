@@ -2,12 +2,12 @@
 
 use App;
 use Lang;
-use Event;
+use Illuminate\Support\Facades\Event;
 use Config;
 use Backend;
 use Request;
 use Validator;
-use BackendMenu;
+use Backend\Facades\BackendMenu;
 use BackendAuth;
 use Twig_Environment;
 use Twig_Loader_String;

@@ -4,7 +4,7 @@ use Lang;
 use File;
 use Cache;
 use Config;
-use Event;
+use Illuminate\Support\Facades\Event;
 use SystemException;
 use October\Rain\Router\Router as RainRouter;
 use October\Rain\Router\Helper as RouterHelper;

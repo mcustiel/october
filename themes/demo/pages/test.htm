@@ -1,0 +1,39 @@
+title = "test"
+url = "/test"
+layout = "two-columns-no-header"
+is_hidden = 0
+
+[youtubeVideo]
+video = "https://www.youtube.com/watch?v=EBnGBGKAkKc"
+width = 640
+height = 390
+==
+<?php
+function onStart()
+{
+    $this->addJs('assets/javascript/overlay.js');
+    $this->addCss('assets/css/overlay.css');
+}
+?>
+==
+<div id="video-overlay">
+    {% component 'youtubeVideo' %}
+</div>
+
+{% put right_column %}
+    <div id="some-ads">
+        This is an add
+    </div>
+{% endput %}
+
+{% put bottom_scripts %}
+
+<script type="text/javascript">
+    var $overlay = new overlay('video-overlay');
+    youtubeVideo_onVideoEnded = function () { console.log('video ended'); $overlay.close(); };
+    youtubeVideo_onVideoPlaying = function () { $overlay.open(); };
+    youtubeVideo_onVideoPaused = function () { $overlay.close(); };
+    youtubeVideo_onVideoBuffering = function () { console.log('video buffering'); };
+    youtubeVideo_onVideoCued = function () { console.log('video cued'); };
+</script>
+{% endput %}

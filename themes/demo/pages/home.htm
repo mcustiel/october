@@ -1,6 +1,28 @@
 title = "Demonstration"
 url = "/"
 layout = "default"
+is_hidden = 0
+
+[youtubeVideo]
+video = "https://youtu.be/U1RAR3M2rEs"
+width = 640
+height = 390
+
+[vimeoVideo]
+video = "https://vimeo.com/104896353"
+width = 640
+height = 390
+
+[videoFile]
+video = 1
+width = 640
+height = 390
+
+[libraryVideo]
+video = "/storage/app/media/12192632_912607985481628_653706626_n.mp4"
+width = 640
+height = 390
+poster = "/storage/app/media/brianTransparente.png"
 ==
 <div class="jumbotron">
     <div class="container">
@@ -9,21 +31,23 @@ layout = "default"
 </div>
 
 <div class="container">
-
+{% component 'youtubeVideo' %}
     <div class="page-header">
         <h2>Overview <small>Basic concepts</small></h2>
     </div>
+    {% component 'vimeoVideo' %}
     <p>
         This page demonstrates the basic CMS features.
         Usually each page built with October is a combination of a layout, page, partials and content blocks,
         although in simple cases you can just use a page without anything else.
     </p>
-
+{% component 'videoFile' %}
     <!-- Layouts -->
     <h3>Layouts</h3>
     <p class="lead">
         <i class="icon-th-large"></i> &nbsp; Layouts define the page scaffold.
     </p>
+    {% component 'libraryVideo' %}
     <p>
         The layout file <code>layouts/default.htm</code> defines the page scaffold &mdash;
         everything that repeats on each page, such as the HTML, HEAD and BODY tags, StyleSheet and JavaScript references.
