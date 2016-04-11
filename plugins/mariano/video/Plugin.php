@@ -6,6 +6,7 @@ use Mariano\Video\Components\File;
 use Mariano\Video\Components\Youtube;
 use Mariano\Video\Components\Vimeo;
 use Mariano\Video\Components\Library;
+use Mariano\Video\Components\Test;
 
 /**
  * video Plugin Information File
@@ -40,6 +41,7 @@ class Plugin extends PluginBase
             Youtube::class => 'youtubeVideo',
             Vimeo::class => 'vimeoVideo',
             Library::class => 'libraryVideo',
+            Test::class => 'testComponent'
         ];
     }
 

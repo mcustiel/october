@@ -2,7 +2,6 @@
 
 class Vimeo extends AbstractVideoComponent
 {
-
     public function componentDetails()
     {
         return [

@@ -1,0 +1,19 @@
+description = "This is a test"
+
+[testComponent]
+==
+{% put scripts %}
+    <script type="text/javascript">
+        console.log("from the partial");
+    </script>
+{% endput %}
+
+{% put styles %}
+    <style type="text/css">
+        a {
+            text-decoration: underline;
+        }
+    </style>
+{% endput %}
+
+{% component 'testComponent' %}
