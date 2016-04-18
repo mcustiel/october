@@ -13,8 +13,7 @@ class CmsObjectCollection extends CollectionBase
 {
     /**
      * Returns objects that use the supplied component.
-     * @param  string|array $components
-     * @param null|callback $callback
+     * @param  string|array  $components
      * @return static
      */
     public function withComponent($components, $callback = null)
@@ -42,7 +41,6 @@ class CmsObjectCollection extends CollectionBase
      * Returns objects whose properties match the supplied value.
      * @param string $property
      * @param string $value
-     * @param bool $strict
      * @return static
      */
     public function where($property, $value, $strict = true)

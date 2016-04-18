@@ -125,9 +125,9 @@ class MediaLibrary
     /**
      * Finds files in the Library.
      * @param string $searchTerm Specifies the search term.
-     * @param string $sortBy Determines the sorting preference.
+     * @param string $sortBy Determines the sorting preference. 
      * Supported values are 'title', 'size', 'lastModified' (see SORT_BY_XXX class constants).
-     * @param string $filter Determines the document type filtering preference.
+     * @param string $filter Determines the document type filtering preference. 
      * Supported values are 'image', 'video', 'audio', 'document' (see FILE_TYPE_XXX constants of MediaLibraryItem class).
      * @return array Returns an array of MediaLibraryItem objects.
      */
@@ -218,7 +218,7 @@ class MediaLibrary
 
     /**
      * Returns a list of all directories in the Library, optionally excluding some of them.
-     * @param array $exclude A list of folders to exclude from the result list.
+     * @param array $exclude A list of folders to exclude from the result list/
      * The folder paths should be specified relative to the Library root.
      * @return array
      */
@@ -227,26 +227,19 @@ class MediaLibrary
         $fullPath = $this->getMediaPath('/');
 
         $folders = $this->getStorageDisk()->allDirectories($fullPath);
-
         $folders = array_unique($folders, SORT_LOCALE_STRING);
 
         $result = [];
 
         foreach ($folders as $folder) {
             $folder = $this->getMediaRelativePath($folder);
-            if (!strlen($folder)) {
+            if (!strlen($folder))
                 $folder = '/';
-            }
 
-            if (Str::startsWith($folder, $exclude)) {
+            if (Str::startsWith($folder, $exclude))
                 continue;
-            }
 
             $result[] = $folder;
-        }
-
-        if (!in_array('/', $result)) {
-            array_unshift($result, '/');
         }
 
         return $result;
@@ -342,34 +335,10 @@ class MediaLibrary
      */
     public function moveFolder($originalPath, $newPath)
     {
-        if (Str::lower($originalPath) !== Str::lower($newPath)) {
-            // If there is no risk that the directory was renamed
-            // by just changing the letter case in the name - 
-            // copy the directory to the destination path and delete
-            // the source directory.
+        if (!$this->copyFolder($originalPath, $newPath))
+            return false;
 
-            if (!$this->copyFolder($originalPath, $newPath)) {
-                return false;
-            }
-
-            $this->deleteFolder($originalPath);
-        } else {
-            // If there's a risk that the directory name was updated
-            // by changing the letter case - swap source and destination
-            // using a temporary directory with random name.
-
-            $tempraryDirPath = $this->generateRandomTmpFolderName(dirname($originalPath));
-
-            if (!$this->copyFolder($originalPath, $tempraryDirPath)) {
-                $this->deleteFolder($tempraryDirPath);
-
-                return false;
-            }
-
-            $this->deleteFolder($originalPath);
-
-            return $this->moveFolder($tempraryDirPath, $newPath);
-        }
+        $this->deleteFolder($originalPath);
 
         return true;
     }
@@ -412,30 +381,14 @@ class MediaLibrary
         $path = str_replace('\\', '/', $path);
         $path = '/'.trim($path, '/');
 
-        if ($normalizeOnly) {
+        if ($normalizeOnly)
             return $path;
-        }
 
-        $regexDirectorySeparator = preg_quote('/', '#');
-        $regexDot = preg_quote('.', '#');
-        $regex = [
-            // Checks for parent or current directory reference at beginning of path
-            '(^'.$regexDot.'+?'.$regexDirectorySeparator.')',
+        if (strpos($path, '..') !== false)
+            throw new ApplicationException(Lang::get('cms::lang.media.invalid_path', ['path'=>$path]));
 
-            // Check for parent or current directory reference in middle of path
-            '('.$regexDirectorySeparator.$regexDot.'+?'.$regexDirectorySeparator.')',
-
-            // Check for parent or current directory reference at end of path
-            '('.$regexDirectorySeparator.$regexDot.'+?$)',
-        ];
-
-        /*
-         * Combine everything to one regex
-         */
-        $regex = '#'.implode('|', $regex).'#';
-        if (preg_match($regex, $path) !== 0 || strpos($path, '//') !== false) {
-            throw new ApplicationException(Lang::get('cms::lang.media.invalid_path', compact('path')));
-        }
+        if (strpos($path, './') !== false || strpos($path, '//') !== false)
+            throw new ApplicationException(Lang::get('cms::lang.media.invalid_path', ['path'=>$path]));
 
         return $path;
     }
@@ -500,7 +453,7 @@ class MediaLibrary
     /**
      * Initializes a library item from a path and item type.
      * @param string $path Specifies the item path relative to the storage disk root.
-     * @param string $itemType Specifies the item type.
+     * @param string $type Specifies the item type.
      * @return mixed Returns the MediaLibraryItem object or NULL if the item is not visible.
      */
     protected function initLibraryItem($path, $itemType)
@@ -584,7 +537,7 @@ class MediaLibrary
     /**
      * Sorts the item list by title, size or last modified date.
      * @param array $itemList Specifies the item list to sort.
-     * @param string $sortBy Determines the sorting preference.
+     * @param string $sortBy Determines the sorting preference. 
      * Supported values are 'title', 'size', 'lastModified' (see SORT_BY_XXX class constants).
      */
     protected function sortItemList(&$itemList, $sortBy)
@@ -614,7 +567,7 @@ class MediaLibrary
     /**
      * Filters item list by file type.
      * @param array $itemList Specifies the item list to sort.
-     * @param string $filter Determines the document type filtering preference.
+     * @param string $filter Determines the document type filtering preference. 
      * Supported values are 'image', 'video', 'audio', 'document' (see FILE_TYPE_XXX constants of MediaLibraryItem class).
      */
     protected function filterItemList(&$itemList, $filter)
@@ -633,7 +586,7 @@ class MediaLibrary
 
     /**
      * Initializes and returns the Media Library disk.
-     * This method should always be used instead of trying to access the
+     * This method should always be used instead of trying to access the 
      * $storageDisk property directly as initializing the disc requires
      * communicating with the remote storage.
      * @return mixed Returns the storage disk object.
@@ -668,19 +621,5 @@ class MediaLibrary
         }
 
         return true;
-    }
-
-    protected function generateRandomTmpFolderName($location)
-    {
-        $temporaryDirBaseName = time();
-
-        $tmpPath = $location.'/tmp-'.$temporaryDirBaseName;
-
-        while ($this->folderExists($tmpPath)) {
-            $temporaryDirBaseName++;
-            $tmpPath = $location.'/tmp-'.$temporaryDirBaseName;
-        }
-
-        return $tmpPath;
     }
 }

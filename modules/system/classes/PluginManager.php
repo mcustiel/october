@@ -457,7 +457,6 @@ class PluginManager
         if (array_key_exists($code, $this->disabledPlugins)) {
             return true;
         }
-        return false;
     }
 
     /**
