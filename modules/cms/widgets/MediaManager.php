@@ -671,12 +671,12 @@ class MediaManager extends WidgetBase
 
     protected function setSidebarVisible($visible)
     {
-        return $this->putSession('sideba_visible', !!$visible);
+        return $this->putSession('sidebar_visible', !!$visible);
     }
 
     protected function getSidebarVisible()
     {
-        return $this->getSession('sideba_visible', true);
+        return $this->getSession('sidebar_visible', true);
     }
 
     protected function itemTypeToIconClass($item, $itemType)
@@ -702,11 +702,12 @@ class MediaManager extends WidgetBase
             $folder = array_pop($path);
 
             $result[$folder] = implode('/', $path).'/'.$folder;
-            if (substr($result[$folder], 0, 1) != '/')
+            if (substr($result[$folder], 0, 1) != '/') {
                 $result[$folder] = '/'.$result[$folder];
+            }
         }
 
-        return array_reverse($result);
+        return array_reverse($result, true);
     }
 
     protected function setViewMode($viewMode)
@@ -970,15 +971,14 @@ class MediaManager extends WidgetBase
             $fileName = File::name($fileName).'.'.$extension;
 
             /*
-            * File name contains non-latin characters, attempt to slug the value
-            */
+             * File name contains non-latin characters, attempt to slug the value
+             */
             if (!$this->validateFileName($fileName)) {
-                $fileNameSlug = Str::slug(File::name($fileName), '-');
-                $fileName = $fileNameSlug.'.'.$extension;
+                $fileNameClean = $this->cleanFileName(File::name($fileName));
+                $fileName = $fileNameClean . '.' . $extension;
             }
 
             // See mime type handling in the asset manager
-
             if (!$uploadedFile->isValid()) {
                 throw new ApplicationException($uploadedFile->getErrorMessage());
             }
@@ -999,9 +999,14 @@ class MediaManager extends WidgetBase
         }
     }
 
+    /**
+     * Validate a proposed media item file name.
+     * @param string
+     * @return string
+     */
     protected function validateFileName($name)
     {
-        if (!preg_match('/^[0-9a-z\.\s_\-]+$/i', $name)) {
+        if (!preg_match('/^[0-9a-z@\.\s_\-]+$/i', $name)) {
             return false;
         }
 
@@ -1010,6 +1015,29 @@ class MediaManager extends WidgetBase
         }
 
         return true;
+    }
+
+    /**
+     * Creates a slug form the string. A modified version of Str::slug
+     * with the main difference that it accepts @-signs
+     * @param string $title
+     * @return string
+     */
+    protected function cleanFileName($title)
+    {
+        $title = Str::ascii($title);
+
+        // Convert all dashes/underscores into separator
+        $flip = $separator = '-';
+        $title = preg_replace('!['.preg_quote($flip).']+!u', $separator, $title);
+
+        // Remove all characters that are not the separator, letters, numbers, whitespace or @.
+        $title = preg_replace('![^'.preg_quote($separator).'\pL\pN\s@]+!u', '', mb_strtolower($title));
+
+        // Replace all separator characters and whitespace by a single separator
+        $title = preg_replace('!['.preg_quote($separator).'\s]+!u', $separator, $title);
+
+        return trim($title, $separator);
     }
 
     //
@@ -1055,7 +1083,8 @@ class MediaManager extends WidgetBase
                     'url' => $url,
                     'dimensions' => $dimensions
                 ];
-            } else {
+            }
+            else {
                 // If the target dimensions are provided, resize the original image and return its URL
                 // and dimensions.
 
@@ -1079,7 +1108,8 @@ class MediaManager extends WidgetBase
                     'dimensions' => $dimensions
                 ];
             }
-        } catch (Exception $ex) {
+        }
+        catch (Exception $ex) {
             if ($sessionDirectoryCreated)
                 @File::deleteDirectory($fullSessionDirectoryPath);
 
