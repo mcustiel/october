@@ -27,15 +27,11 @@ class InlineAssets extends Twig_Extension
         return 'McustielCompactPages';
     }
 
-    private function assetsCode($assetsType)
-    {
-        $html = '';
-        foreach ($this->controller->getAssetPaths()[$assetsType] as $path) {
-            $html .= file_get_contents(base_path(parse_url($path)['path']));
-        }
-        return $html;
-    }
-
+    /**
+     * Gets all added styles and returns the code to inline it in the html.
+     *
+     * @return string
+     */
     public function inlineStyles()
     {
         return '<style type="text/css">' . PHP_EOL
@@ -43,10 +39,24 @@ class InlineAssets extends Twig_Extension
             . '</style>' .  PHP_EOL;
     }
 
+    /**
+     * Gets all added scripts and returns the code to inline it in the html.
+     *
+     * @return string
+     */
     public function inlineScripts()
     {
         return '<script type="text/javascript">' . PHP_EOL
             . $this->assetsCode('js') . PHP_EOL
             . '</script>' .  PHP_EOL;
+    }
+
+    private function assetsCode($assetsType)
+    {
+        $html = '';
+        foreach ($this->controller->getAssetPaths()[$assetsType] as $path) {
+            $html .= file_get_contents(base_path(parse_url($path)['path']));
+        }
+        return $html;
     }
 }
