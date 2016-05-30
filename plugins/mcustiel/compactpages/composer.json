@@ -1,0 +1,14 @@
+{
+    "name": "mcustiel/oc-compact-pages",
+    "repositories": [ 
+        {
+            "type": "vcs",
+            "url": "https://github.com/Musiksammler/phpwee-php-minifier"
+        }
+    ],
+    "require": {
+        "searchturbine/phpwee-php-minifier": "*"
+    },
+    "minimum-stability" : "dev",
+    "prefer-stable" : true
+}
